@@ -1,0 +1,16 @@
+service: event-destinations
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  helloStarting:
+    handler: handler.starting
+    events:
+      - http:
+          path: /demo
+          method: post
+          cors: true
+    destinations:
+      onFailure: "arn:aws:sns:us-east-1:560654602687:myEventDestinationTopic"
